@@ -156,8 +156,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -340.2, y: -90.100006}
-  m_SizeDelta: {x: -820.4254, y: -560.2279}
+  m_AnchoredPosition: {x: -310.1, y: -100.3}
+  m_SizeDelta: {x: -760.19336, y: -539.749}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7680815
 MonoBehaviour:
@@ -356,12 +356,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'blah
-
-
-    blah
-
-'
+  m_Text: 
 --- !u!222 &257379137
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -806,7 +801,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 
 --- !u!222 &795940763
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1223,6 +1218,9 @@ MonoBehaviour:
   - Hello Humanz
   - I am an AI
   - What will be the weather like outside?
+  moveTarget: {x: 1, y: 0}
+  moveSpeed: 1
+  smooth: 0
 --- !u!114 &1806556807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1230,7 +1228,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1806556805}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6facbd6a7628740ba96d27df0bdb85d3, type: 3}
   m_Name: 

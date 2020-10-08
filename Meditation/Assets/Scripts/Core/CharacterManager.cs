@@ -40,4 +40,12 @@ public RectTransform characterPanel;
         return newCharacter;
 
     }
+
+    public class CHARACTERPOSITIONS
+    {
+        public Vector2 bottomLeft = new Vector2(0,0);
+        public Vector2 bottomRight = new Vector2(1f,0);
+        public Vector2 center = new Vector2(0.5f,0.5f);
+
+    }
 }

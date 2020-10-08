@@ -14,6 +14,11 @@ public class characterTesting : MonoBehaviour
     public string[] speech;
     int i = 0;
 
+
+    public Vector2 moveTarget;
+    public float moveSpeed;
+    public bool smooth;
+
     // Update is called once per frame
     void Update()
     {
@@ -26,6 +31,14 @@ public class characterTesting : MonoBehaviour
                 DialogueSystem.instance.Close();
 
             i++;
+        }
+
+        if(Input.GetKeyDown(KeyCode.M)){
+            boy.MoveTo(moveTarget, moveSpeed, smooth);
+        }
+
+         if(Input.GetKeyDown(KeyCode.S)){
+            boy.StopMoving(true);
         }
     }
 }
