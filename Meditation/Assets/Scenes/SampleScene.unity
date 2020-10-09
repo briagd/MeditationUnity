@@ -154,10 +154,10 @@ RectTransform:
   m_Father: {fileID: 1991689790}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -310.1, y: -100.3}
-  m_SizeDelta: {x: -760.19336, y: -539.749}
+  m_AnchorMin: {x: 0.07700001, y: 0.319}
+  m_AnchorMax: {x: 0.30174053, y: 0.3914448}
+  m_AnchoredPosition: {x: 1.2999878, y: 1.699997}
+  m_SizeDelta: {x: -2.254715, y: -0.3901291}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7680815
 MonoBehaviour:
@@ -229,10 +229,10 @@ RectTransform:
   m_Father: {fileID: 1991689790}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 5, y: -192.4108}
-  m_SizeDelta: {x: -88.03729, y: -471.60632}
+  m_AnchorMin: {x: 0.06540758, y: 0.051000003}
+  m_AnchorMax: {x: 0.93000007, y: 0.26561424}
+  m_AnchoredPosition: {x: 2, y: -0.5}
+  m_SizeDelta: {x: 3.0563354, y: -0.53134155}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &34673328
 MonoBehaviour:
@@ -1207,13 +1207,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e08a7640b0d2b055ea84ffefe6300801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boy:
+  Boy:
     characName: 
     root: {fileID: 0}
     renderers:
       renderer: {fileID: 0}
       bodyRenderer: {fileID: 0}
       expressionRenderer: {fileID: 0}
+      allBodyRenders: []
+      allExpressionRenders: []
   speech:
   - Hello Humanz
   - I am an AI
@@ -1221,6 +1223,10 @@ MonoBehaviour:
   moveTarget: {x: 1, y: 0}
   moveSpeed: 1
   smooth: 0
+  bodyIndex: 2
+  expressionIndex: 2
+  speed: 2.21
+  smoothTransitions: 1
 --- !u!114 &1806556807
 MonoBehaviour:
   m_ObjectHideFlags: 0

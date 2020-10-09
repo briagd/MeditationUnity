@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class characterTesting : MonoBehaviour
 {
-    public Character boy;
+    public Character Boy;
     // Start is called before the first frame update
     void Start()
     {
-        boy = CharacterManager.instance.GetCharacter("Boy", enableCharacOnStart:false);
+        Boy = CharacterManager.instance.GetCharacter("Boy", enableCharacOnStart:false);
+        Boy.GetSprite(0);
     }
 
     public string[] speech;
@@ -19,13 +20,18 @@ public class characterTesting : MonoBehaviour
     public float moveSpeed;
     public bool smooth;
 
+
+    public int bodyIndex, expressionIndex = 0;
+    public float speed = 5f;
+    public bool smoothTransitions = false;
+
     // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
             if (i < speech.Length){
-                boy.Say(speech[i]);
+                Boy.Say(speech[i]);
             }
             else
                 DialogueSystem.instance.Close();
@@ -34,11 +40,31 @@ public class characterTesting : MonoBehaviour
         }
 
         if(Input.GetKeyDown(KeyCode.M)){
-            boy.MoveTo(moveTarget, moveSpeed, smooth);
+            Boy.MoveTo(moveTarget, moveSpeed, smooth);
         }
 
          if(Input.GetKeyDown(KeyCode.S)){
-            boy.StopMoving(true);
+            Boy.StopMoving(true);
         }
+
+        if(Input.GetKeyDown(KeyCode.B)){
+            if(Input.GetKey(KeyCode.T))
+            {
+                Boy.TranisitionBody(Boy.GetSprite(bodyIndex), speed, smoothTransitions);
+            }
+            else
+                Boy.SetBody(bodyIndex);
+        }
+
+        if(Input.GetKeyDown(KeyCode.E)){
+            if(Input.GetKey(KeyCode.T))
+            {
+                Boy.TranisitionExpression(Boy.GetSprite(bodyIndex), speed, smoothTransitions);
+            }
+            else
+            {
+            Boy.SetExpression(expressionIndex);        }
+            
+            }
     }
 }

@@ -28,8 +28,10 @@ public class Character
         renderers.renderer = ob.GetComponentInChildren<RawImage>();
         if(isMultiLayerCharac)
         {
-            renderers.bodyRenderer = ob.transform.Find("body").GetComponent<Image>();
-            renderers.expressionRenderer = ob.transform.Find("expression").GetComponent<Image>();
+            renderers.bodyRenderer = ob.transform.Find("bodyLayer").GetComponentInChildren<Image>();
+            renderers.expressionRenderer = ob.transform.Find("expressionLayer").GetComponentInChildren<Image>();
+            renderers.allBodyRenders.Add(renderers.bodyRenderer);
+            renderers.allExpressionRenders.Add(renderers.expressionRenderer);
         }
 
         dialogueSystem = DialogueSystem.instance;
@@ -85,6 +87,143 @@ public class Character
         StopMoving();
     }
 
+    // Begin Transitioning Images
+    public Sprite GetSprite(int index = 0)
+    {
+        Sprite[] sprites = Resources.LoadAll<Sprite>("Images/Characters/" + characName);
+        return sprites[index];
+    }
+
+    public void SetBody(int index)
+    {
+        renderers.bodyRenderer.sprite = GetSprite(index);
+
+    }
+
+    public void SetBody(Sprite sprite)
+    {   
+        renderers.bodyRenderer.sprite = sprite;
+    }
+
+
+    public void SetExpression(int index)
+    {
+        renderers.expressionRenderer.sprite = GetSprite(index);
+
+    }
+
+    public void SetExpression(Sprite sprite)
+    {   
+        renderers.expressionRenderer.sprite = sprite;
+    }
+
+
+    // Body transition
+    bool isTransitioningBody {get {return transitioningBody != null;}}
+    Coroutine transitioningBody = null;
+
+    public void TranisitionBody(Sprite sprite, float speed, bool smooth)
+    {
+        if(renderers.bodyRenderer.sprite == sprite)
+            return;
+        
+        StopTransitioningBody();
+        transitioningBody = CharacterManager.instance.StartCoroutine(TransitioningBody(sprite, speed, smooth));
+    }
+
+    void StopTransitioningBody()
+    {
+        if(isTransitioningBody)
+            CharacterManager.instance.StopCoroutine(transitioningBody);
+        transitioningBody = null;
+    }
+
+    public IEnumerator TransitioningBody(Sprite sprite, float speed, bool smooth)
+    {
+        for (int i = 0; i< renderers.allBodyRenders.Count; i++)
+        {
+            Image image = renderers.allBodyRenders[i];
+            if (image.sprite == sprite)
+            {
+                renderers.bodyRenderer = image;
+                break;
+            }
+        }    
+
+        if(renderers.bodyRenderer.sprite != sprite)
+        {
+            Image image = GameObject.Instantiate(renderers.bodyRenderer.gameObject, renderers.bodyRenderer.transform.parent).GetComponent<Image>();
+            renderers.allBodyRenders.Add(image);
+            renderers.bodyRenderer = image;
+            image.color = GlobalF.setAlpha(image.color, 0f);
+            image.sprite = sprite;
+        }
+
+        while(GlobalF.TransitionImages(ref renderers.bodyRenderer, ref renderers.allBodyRenders, speed, smooth))
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        Debug.Log ("done");
+
+        StopTransitioningBody();
+    }
+
+
+     // Expression transition
+    bool isTransitioningExpression {get {return transitioningExpression != null;}}
+    Coroutine transitioningExpression = null;
+
+    public void TranisitionExpression(Sprite sprite, float speed, bool smooth)
+    {
+        if(renderers.expressionRenderer.sprite == sprite)
+            return;
+        
+        StopTransitioningExpression();
+        transitioningExpression = CharacterManager.instance.StartCoroutine(TransitioningExpression(sprite, speed, smooth));
+    }
+
+    void StopTransitioningExpression()
+    {
+        if(isTransitioningExpression)
+            CharacterManager.instance.StopCoroutine(transitioningExpression);
+        transitioningExpression = null;
+    }
+
+    public IEnumerator TransitioningExpression(Sprite sprite, float speed, bool smooth)
+    {
+        for (int i = 0; i< renderers.allExpressionRenders.Count; i++)
+        {
+            Image image = renderers.allExpressionRenders[i];
+            if (image.sprite == sprite)
+            {
+                renderers.expressionRenderer = image;
+                break;
+            }
+        }    
+
+        if(renderers.expressionRenderer.sprite != sprite)
+        {
+            Image image = GameObject.Instantiate(renderers.expressionRenderer.gameObject, renderers.expressionRenderer.transform.parent).GetComponent<Image>();
+            renderers.allExpressionRenders.Add(image);
+            renderers.expressionRenderer = image;
+            image.color = GlobalF.setAlpha(image.color, 0f);
+            image.sprite = sprite;
+        }
+
+        while(GlobalF.TransitionImages(ref renderers.expressionRenderer, ref renderers.allExpressionRenders, speed, smooth))
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        Debug.Log ("done");
+
+        StopTransitioningExpression();
+    }
+    // End transitioning images
+
+
+
     IEnumerator Moving(Vector2 target, float speed, bool smooth)
     {
         targetPos = target;
@@ -111,6 +250,9 @@ public class Character
         public RawImage renderer;
         public Image bodyRenderer;
         public Image expressionRenderer;
+
+        public List<Image> allBodyRenders = new List<Image>();
+        public List<Image> allExpressionRenders = new List<Image>();
 
     }
     public Renderers renderers = new Renderers();
