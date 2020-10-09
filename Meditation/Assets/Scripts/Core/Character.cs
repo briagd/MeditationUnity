@@ -155,7 +155,7 @@ public class Character
             Image image = GameObject.Instantiate(renderers.bodyRenderer.gameObject, renderers.bodyRenderer.transform.parent).GetComponent<Image>();
             renderers.allBodyRenders.Add(image);
             renderers.bodyRenderer = image;
-            image.color = GlobalF.setAlpha(image.color, 0f);
+            image.color = GlobalF.SetAlpha(image.color, 0f);
             image.sprite = sprite;
         }
 
@@ -207,7 +207,7 @@ public class Character
             Image image = GameObject.Instantiate(renderers.expressionRenderer.gameObject, renderers.expressionRenderer.transform.parent).GetComponent<Image>();
             renderers.allExpressionRenders.Add(image);
             renderers.expressionRenderer = image;
-            image.color = GlobalF.setAlpha(image.color, 0f);
+            image.color = GlobalF.SetAlpha(image.color, 0f);
             image.sprite = sprite;
         }
 
