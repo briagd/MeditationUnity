@@ -13,11 +13,7 @@ public class DialogueSystem : MonoBehaviour
         instance = this;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
 
     // Update is called once per frame
     void Update()
@@ -42,7 +38,11 @@ public class DialogueSystem : MonoBehaviour
     public void StopSpeaking(){
          if (isSpeaking){
             StopCoroutine(speaking);
-                    }
+        }
+        if (textArchitect != null && textArchitect.isConstructing)
+        {
+            textArchitect.Stop();
+        }
         speaking = null;
     }
 
@@ -51,23 +51,28 @@ public class DialogueSystem : MonoBehaviour
 
     string targetSpeech = "";
     Coroutine speaking = null;
-
+    TextArchitect textArchitect = null;
     IEnumerator Speaking(string speech, bool additive, string speaker=""){
         speechPanel.SetActive(true);
-        targetSpeech = speech;
-        if(!additive)
-            speechText.text = "";
-        else
-            speech = speechText.text + targetSpeech;
-        speechText.text = "";
+        string additiveSpeech = additive ? speechText.text : "";
+        targetSpeech = additiveSpeech + speech;
+
+        textArchitect = new TextArchitect(speech, additiveSpeech);
+
         speakerNameText.text = DetermineSpeaker(speaker);
         isWaitingForUserInput = false;
 
-        while (speechText.text != targetSpeech)
+        while (textArchitect.isConstructing)
         {
-            speechText.text += targetSpeech[speechText.text.Length];
+            if(Input.GetKey(KeyCode.Space))
+                textArchitect.skip = true;
+
+            speechText.text = textArchitect.currentText;
+
+            
             yield return new WaitForEndOfFrame();
         }
+        speechText.text = textArchitect.currentText;
 
         isWaitingForUserInput = true;
         while(isWaitingForUserInput){
