@@ -52,12 +52,13 @@ public class DialogueSystem : MonoBehaviour
     string targetSpeech = "";
     Coroutine speaking = null;
     TextArchitect textArchitect = null;
+    public TextArchitect currentArchitect {get{return textArchitect;}}
     IEnumerator Speaking(string speech, bool additive, string speaker=""){
         speechPanel.SetActive(true);
         string additiveSpeech = additive ? speechText.text : "";
         targetSpeech = additiveSpeech + speech;
 
-        textArchitect = new TextArchitect(speech, additiveSpeech);
+        textArchitect = new TextArchitect(speechText, speech, additiveSpeech);
 
         speakerNameText.text = DetermineSpeaker(speaker);
         speakerNamePane.SetActive(speakerNameText.text != "" ? true : false);
@@ -69,12 +70,11 @@ public class DialogueSystem : MonoBehaviour
             if(Input.GetKey(KeyCode.Space))
                 textArchitect.skip = true;
 
-            speechText.text = textArchitect.currentText;
 
             
             yield return new WaitForEndOfFrame();
         }
-        speechText.text = textArchitect.currentText;
+
 
         isWaitingForUserInput = true;
         while(isWaitingForUserInput){

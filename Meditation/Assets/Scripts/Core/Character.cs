@@ -242,17 +242,17 @@ public class Character
 
     public void Flip()
     {
-        root.localScale = new Vector3(root.localScale.x*-1,1,1);
+        root.localScale = new Vector3(root.localScale.x*-1,root.localScale.y,root.localScale.z);
     }
 
         public void Faceleft()
     {
-        root.localScale = Vector3.one;
+        root.localScale = new Vector3(Mathf.Abs(root.localScale.x),root.localScale.y,root.localScale.z);
     }
 
         public void FaceRight()
     {
-        root.localScale = new Vector3(-1,1,1);
+        root.localScale = new Vector3(Mathf.Abs(root.localScale.x) *-1,root.localScale.y,root.localScale.z);
     }
 
     public void FadeOut(float speed = 3, bool smooth = false)
