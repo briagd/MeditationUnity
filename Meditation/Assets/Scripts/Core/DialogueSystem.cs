@@ -60,6 +60,8 @@ public class DialogueSystem : MonoBehaviour
         textArchitect = new TextArchitect(speech, additiveSpeech);
 
         speakerNameText.text = DetermineSpeaker(speaker);
+        speakerNamePane.SetActive(speakerNameText.text != "" ? true : false);
+
         isWaitingForUserInput = false;
 
         while (textArchitect.isConstructing)
@@ -98,6 +100,7 @@ public class DialogueSystem : MonoBehaviour
     [System.Serializable]
     public class ELEMENTS{
         public GameObject speechPanel;
+        public GameObject speakerNamePane;
         public TextMeshProUGUI speakerNameText;
         public TextMeshProUGUI speechText;
     }
@@ -105,4 +108,5 @@ public class DialogueSystem : MonoBehaviour
     public GameObject speechPanel {get {return eLEMENTS.speechPanel;}}
     public TextMeshProUGUI speakerNameText {get {return eLEMENTS.speakerNameText;}}
     public TextMeshProUGUI speechText {get {return eLEMENTS.speechText;}}
+    public GameObject speakerNamePane {get {return eLEMENTS.speakerNamePane;}}
 }

@@ -6,7 +6,7 @@ public class CharacterManager : MonoBehaviour
 {
 
 
-public RectTransform characterPanel;
+    public RectTransform characterPanel;
     public static CharacterManager instance;
 
     public List<Character> characters = new List<Character>();

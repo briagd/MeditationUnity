@@ -146,9 +146,7 @@ public class Character
 
     public void TranisitionBody(Sprite sprite, float speed, bool smooth)
     {
-        if(renderers.bodyRenderer.sprite == sprite)
-            return;
-        
+
         StopTransitioningBody();
         transitioningBody = CharacterManager.instance.StartCoroutine(TransitioningBody(sprite, speed, smooth));
     }
@@ -181,12 +179,12 @@ public class Character
             image.sprite = sprite;
         }
 
-        while(GlobalF.TransitionImages(ref renderers.bodyRenderer, ref renderers.allBodyRenders, speed, smooth))
+        while(GlobalF.TransitionImages(ref renderers.bodyRenderer, ref renderers.allBodyRenders, speed, smooth, true))
         {
             yield return new WaitForEndOfFrame();
         }
 
-        Debug.Log ("done");
+        // Debug.Log ("done");
 
         StopTransitioningBody();
     }
@@ -198,9 +196,7 @@ public class Character
 
     public void TranisitionExpression(Sprite sprite, float speed, bool smooth)
     {
-        if(renderers.expressionRenderer.sprite == sprite)
-            return;
-        
+
         StopTransitioningExpression();
         transitioningExpression = CharacterManager.instance.StartCoroutine(TransitioningExpression(sprite, speed, smooth));
     }
@@ -233,16 +229,54 @@ public class Character
             image.sprite = sprite;
         }
 
-        while(GlobalF.TransitionImages(ref renderers.expressionRenderer, ref renderers.allExpressionRenders, speed, smooth))
+        while(GlobalF.TransitionImages(ref renderers.expressionRenderer, ref renderers.allExpressionRenders, speed, smooth, true))
         {
             yield return new WaitForEndOfFrame();
         }
 
-        Debug.Log ("done");
+        // Debug.Log ("done");
 
         StopTransitioningExpression();
     }
     // End transitioning images
+
+    public void Flip()
+    {
+        root.localScale = new Vector3(root.localScale.x*-1,1,1);
+    }
+
+        public void Faceleft()
+    {
+        root.localScale = Vector3.one;
+    }
+
+        public void FaceRight()
+    {
+        root.localScale = new Vector3(-1,1,1);
+    }
+
+    public void FadeOut(float speed = 3, bool smooth = false)
+    {
+        Sprite alphaSprite = Resources.Load<Sprite>("Images/AlphaOnly");
+
+        lastBodySprite = renderers.bodyRenderer.sprite;
+        lastFaceSprite = renderers.expressionRenderer.sprite;
+
+        TranisitionBody(alphaSprite, speed, smooth);
+        TranisitionExpression(alphaSprite, speed, smooth);
+
+    }
+
+    Sprite lastBodySprite, lastFaceSprite = null;
+
+    public void FadeIn(float speed = 3, bool smooth = false)
+    {
+        if(lastBodySprite!=null && lastFaceSprite!=null)
+        {
+            TranisitionBody(lastBodySprite, speed, smooth);
+            TranisitionExpression(lastFaceSprite, speed, smooth);
+        }
+    }
 
 
 
