@@ -44,10 +44,9 @@ public class Character
         if(!enabled)
             enabled = true;
 
-        if(!add)
-            dialogueSystem.Say(speech, characName);
-        else
-            dialogueSystem.SayAdd(speech, characName);
+
+        dialogueSystem.Say(speech, characName, add);
+   
 
     }
 
@@ -94,6 +93,19 @@ public class Character
         return sprites[index];
     }
 
+    public Sprite GetSprite(string spriteName = "")
+    {
+        Sprite[] sprites = Resources.LoadAll<Sprite>("Images/Characters/" + characName);
+        for (int i = 0; i<sprites.Length; i++)
+        {
+            if(sprites[i].name == spriteName)
+            {
+                return sprites[i];
+            }
+        }
+        return sprites.Length > 0 ? sprites[0] : null; 
+    }
+
     public void SetBody(int index)
     {
         renderers.bodyRenderer.sprite = GetSprite(index);
@@ -103,6 +115,11 @@ public class Character
     public void SetBody(Sprite sprite)
     {   
         renderers.bodyRenderer.sprite = sprite;
+    }
+
+    public void SetBody(string spriteName)
+    {   
+        renderers.bodyRenderer.sprite = GetSprite(spriteName);
     }
 
 
@@ -115,6 +132,11 @@ public class Character
     public void SetExpression(Sprite sprite)
     {   
         renderers.expressionRenderer.sprite = sprite;
+    }
+
+        public void SetExpression(string spriteName)
+    {   
+        renderers.expressionRenderer.sprite = GetSprite(spriteName);
     }
 
 
