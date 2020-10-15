@@ -58,7 +58,10 @@ public class DialogueSystem : MonoBehaviour
         string additiveSpeech = additive ? speechText.text : "";
         targetSpeech = additiveSpeech + speech;
 
-        textArchitect = new TextArchitect(speechText, speech, additiveSpeech);
+        if(textArchitect== null)
+            textArchitect = new TextArchitect(speechText, speech, additiveSpeech);
+        else
+            textArchitect.Renew(speech, additiveSpeech);
 
         speakerNameText.text = DetermineSpeaker(speaker);
         speakerNamePane.SetActive(speakerNameText.text != "" ? true : false);

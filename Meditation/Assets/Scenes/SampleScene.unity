@@ -1409,6 +1409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bacbc7cdacc1d3c46a4bde392df51e04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cachedLastSpeaker: 
 --- !u!4 &1706463322
 Transform:
   m_ObjectHideFlags: 0
@@ -1467,6 +1468,7 @@ GameObject:
   - component: {fileID: 1806556809}
   - component: {fileID: 1806556810}
   - component: {fileID: 1806556811}
+  - component: {fileID: 1806556812}
   m_Layer: 0
   m_Name: Tester
   m_TagString: Untagged
@@ -1585,15 +1587,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 705817e2052b49639aac067c76f77c60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 0}
   tmprotext: {fileID: 1297662234}
   say: 'Hello, <i> HUMANZ</i> !!!
 
     hfahifaohfqa '
   charactersPerFrame: 1
   speed: 1
-  useEncap: 1
-  useTMPro: 1
+--- !u!114 &1806556812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806556805}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1301cc85f811027fb99686d45ed3eb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tex1: {fileID: 2800000, guid: 2e71a09d2dca727469321c05817ed372, type: 3}
+  tex2: {fileID: 2800000, guid: f1051e6e19fb2ba7fa650afeda889540, type: 3}
+  tex3: {fileID: 2800000, guid: a5bee656c47eab2bfa5199a2be5f4bac, type: 3}
+  trans1: {fileID: 2800000, guid: 9b8f0205ab7bc18b7aef4666e104f725, type: 3}
+  trans2: {fileID: 2800000, guid: d38519d90eaf7cffcbc245ad99535815, type: 3}
+  trans3: {fileID: 2800000, guid: cfd5ade2377094fe3a1b4b01d51f9c33, type: 3}
 --- !u!1 &1927761960
 GameObject:
   m_ObjectHideFlags: 0
