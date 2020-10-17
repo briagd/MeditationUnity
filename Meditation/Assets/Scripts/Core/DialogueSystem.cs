@@ -49,7 +49,7 @@ public class DialogueSystem : MonoBehaviour
     public bool isSpeaking {get{return speaking!=null;}}
     [HideInInspector] public bool isWaitingForUserInput = false;
 
-    string targetSpeech = "";
+    public string targetSpeech = "";
     Coroutine speaking = null;
     TextArchitect textArchitect = null;
     public TextArchitect currentArchitect {get{return textArchitect;}}
