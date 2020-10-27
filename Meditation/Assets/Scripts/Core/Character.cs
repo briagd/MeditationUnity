@@ -20,7 +20,7 @@ public class Character
     public Character(string _name, bool enableOnStart = true)
     {
         CharacterManager cm = CharacterManager.instance;
-        GameObject prefab = Resources.Load("CharacterPrefab/Character["+_name+"]") as GameObject;
+        GameObject prefab = Resources.Load("Prefabs/CharacterPrefab/Character["+_name+"]") as GameObject;
         GameObject ob = GameObject.Instantiate(prefab, cm.characterPanel);
         root = ob.GetComponent<RectTransform>();
         characName = _name;
@@ -46,7 +46,7 @@ public class Character
 
 
         dialogueSystem.Say(speech, characName, add);
-   
+
 
     }
 
@@ -103,7 +103,7 @@ public class Character
                 return sprites[i];
             }
         }
-        return sprites.Length > 0 ? sprites[0] : null; 
+        return sprites.Length > 0 ? sprites[0] : null;
     }
 
     public void SetBody(int index)
@@ -113,12 +113,12 @@ public class Character
     }
 
     public void SetBody(Sprite sprite)
-    {   
+    {
         renderers.bodyRenderer.sprite = sprite;
     }
 
     public void SetBody(string spriteName)
-    {   
+    {
         renderers.bodyRenderer.sprite = GetSprite(spriteName);
     }
 
@@ -130,12 +130,12 @@ public class Character
     }
 
     public void SetExpression(Sprite sprite)
-    {   
+    {
         renderers.expressionRenderer.sprite = sprite;
     }
 
         public void SetExpression(string spriteName)
-    {   
+    {
         renderers.expressionRenderer.sprite = GetSprite(spriteName);
     }
 
@@ -168,7 +168,7 @@ public class Character
                 renderers.bodyRenderer = image;
                 break;
             }
-        }    
+        }
 
         if(renderers.bodyRenderer.sprite != sprite)
         {
@@ -218,7 +218,7 @@ public class Character
                 renderers.expressionRenderer = image;
                 break;
             }
-        }    
+        }
 
         if(renderers.expressionRenderer.sprite != sprite)
         {
